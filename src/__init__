@@ -1,0 +1,6 @@
+"""Aplikasi e-MotorMabur
+By Kristian Brilyawan kristian.brilyawan1998@gmail.com
+
+Aplikasi untuk membantu pencatatan data penumpang pesawat dan melakukan print tiket"""
+
+__version__ = "0.1.0"
