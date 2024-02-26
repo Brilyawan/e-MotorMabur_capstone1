@@ -1,11 +1,11 @@
-1;Krisna Hadi;7417625173786715;Lion Air;JT878;Semarang Airport(SRG);Surabaya Airport(SUB);Semarang;Surabaya;09:00;10:00;2024-04-19
-2;Akhmad Amir;5591597815178946;Batik Air;ID1265;Jakarta Soekarno-Hatta(CGK);Ujung Pandang(UPG);Jakarta;Makassar;13:30;15:15;2024-05-08
-3;Mohamad Rahman;3489364686139923;Sriwijaya Air;SJ9099;Ujung Pandang(UPG);Denpasar Bali(DPS);Makassar;Bali;15:00;16:15;2024-03-30
-4;Edi Anisa;8521223343778733;Batik Air;ID1265;Jakarta Soekarno-Hatta(CGK);Ujung Pandang(UPG);Jakarta;Makassar;13:30;15:15;2024-05-08
-5;Putra Burhanuddin;9778984448551328;Wings Air;IW0012;Ujung Pandang(UPG);Palu Airport(PLW);Makassar;Palu;07:15;09:00;2024-03-28
-6;Aditya Indah;2912911454713552;Citilink;QG5542;Pontianak Airport(PNK);Jakarta Soekarno-Hatta(CGK);Pontianak;Jakarta;17:15;19:45;2024-02-28
-7;Tirto Ismail;1888224986841665;Garuda Indonesia;GA3211;Jakarta Soekarno-Hatta(CGK);Semarang Airport(SRG);Jakarta;Semarang;10:00;11:25;2024-04-22
-8;Imam Nirmala;4761388198321888;AirAsia;QZ8876;Surabaya Airport(SUB);Denpasar Bali(DPS);Surabaya;Bali;15:00;16:15;2024-05-01
-9;Indra Kusuma;3235431473999763;Garuda Indonesia;GA3213;Semarang Airport(SRG);Ujung Pandang(UPG);Semarang;Makassar;09:00;11:00;2024-03-27
-10;Kristian Brilyawan;1234123412341233;Komodo Air;JT1234;Semarang Airport(SRG);Surabaya Airport(SBU);Semarang;Surabaya;11:15;12:15;2024-01-04
-11;Faisal Sari;5895001769245242;Garuda Indonesia;GA3211;Jakarta Soekarno-Hatta(CGK);Semarang Airport(SRG);Jakarta;Semarang;10:00;11:25;2024-04-22
+0;Krisna Hadi;7417625173786715;Lion Air;JT878;SRG;SUB;Semarang;Surabaya;09:00;10:00;2024-04-19
+1;Akhmad Amir;5591597815178946;Batik Air;ID1265;CGK;UPG;Jakarta;Makassar;13:30;15:15;2024-05-08
+2;Mohamad Rahman;3489364686139923;Sriwijaya Air;SJ9099;UPG;DPS;Makassar;Bali;15:00;16:15;2024-03-30
+3;Edi Anisa;8521223343778733;Batik Air;ID1265;CGK;UPG;Jakarta;Makassar;13:30;15:15;2024-05-08
+4;Putra Burhanuddin;9778984448551328;Wings Air;IW0012;UPG;PLW;Makassar;Palu;07:15;09:00;2024-03-28
+5;Aditya Indah;2912911454713552;Citilink;QG5542;PNK;CGK;Pontianak;Jakarta;17:15;19:45;2024-02-28
+6;Tirto Ismail;1888224986841665;Garuda Indonesia;GA3211;CGK;SRG;Jakarta;Semarang;10:00;11:25;2024-04-22
+7;Imam Nirmala;4761388198321888;AirAsia;QZ8876;SUB;DPS;Surabaya;Bali;15:00;16:15;2024-05-01
+8;Indra Kusuma;3235431473999763;Garuda Indonesia;GA3213;SRG;UPG;Semarang;Makassar;09:00;11:00;2024-03-27
+9;Kristian Brilyawan;1234123412341233;Komodo Air;JT1234;SRG;SBU;Semarang;Surabaya;11:15;12:15;2024-01-04
+10;Faisal Sari;5895001769245242;Garuda Indonesia;GA3211;CGK;SRG;Jakarta;Semarang;10:00;11:25;2024-04-22

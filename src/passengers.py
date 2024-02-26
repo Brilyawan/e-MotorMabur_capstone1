@@ -5,13 +5,13 @@ def validasi_int(prompt):
     """Fungsi untuk melakukan validasi input integer / angka."""
     while True:
         try:
-            num = int(input(prompt))
+            num = float(input(prompt))
             if num < 0:
-                print('Anda memasukkan angka negatif, silahkan masukkan angka yang sesuai.')
+                print('\nAnda memasukkan angka negatif, silahkan masukkan angka yang sesuai.')
             else:
                 return num
         except ValueError:
-            print('Anda memasukkan selain angka, silahkan masukkan angka yang sesuai.')
+            print('\nAnda memasukkan selain angka, silahkan masukkan angka yang sesuai.')
 
 def validasi_str(prompt):
     """Fungsi untuk melakukan validasi input string / huruf."""
@@ -20,7 +20,36 @@ def validasi_str(prompt):
         if word.replace(' ','').isalpha():
             return word.title()
         else:
-            print('Anda hanya bisa memasukkan karakter alfabet.')
+            print('\nAnda hanya bisa memasukkan karakter alfabet.')
+
+def validasi_waktu(prompt):
+    while True:
+        time_input = input(prompt)
+        split_time = time_input.split(':')
+        if len(split_time) != 2 or not split_time[0].isdigit() or not split_time[1].isdigit():
+            print("\nFormat waktu tidak valid. Pastikan formatnya adalah 'jam:menit' (contoh: 10:25)")
+            continue
+        hour = int(split_time[0])
+        minute = int(split_time[1])
+        if hour < 0 or hour > 23 or minute < 0 or minute > 59:
+            print("\nFormat waktu tidak valid. Pastikan jam berada dalam rentang 0-23 dan menit berada dalam rentang 0-59")
+            continue
+        return time_input
+    
+def validasi_tanggal(prompt):
+    while True:
+        date_input = input(prompt)
+        split_date = date_input.split('-')
+        if len(split_date) != 3 or not all(part.isdigit() for part in split_date):
+            print("\nFormat tanggal tidak valid. Pastikan formatnya adalah 'tahun-bulan-tanggal' (contoh: 2024-01-14)")
+            continue
+        year = int(split_date[0])
+        month = int(split_date[1])
+        day = int(split_date[2])
+        if year < 0 or month < 1 or month > 12 or day < 1 or day > 31:
+            print("\nFormat tanggal tidak valid. Pastikan tahun, bulan, dan tanggal berada dalam rentang yang sesuai")
+            continue
+        return date_input            
 
 def convert_to_table(data, columns, title):
     """Fungsi untuk mengkonversi data yang ada menjadi tabel."""
@@ -37,7 +66,7 @@ def nomor_1(pilihan):
         3. Kembali ke Menu Utama
         =======================================
         ''')
-        pilihan = validasi_int('Silahkan tentukan pilihan Anda [1-3]: ')
+        pilihan = validasi_int('\nSilahkan tentukan pilihan Anda [1-3]: ')
         if pilihan == 1:
             data_semua(__main__.database)
         elif pilihan == 2:
@@ -45,7 +74,7 @@ def nomor_1(pilihan):
         elif pilihan == 3:
             return
         else:
-            print(f'*****Pilihan {pilihan} tidak terdapat di daftar!*****')
+            print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
             
                 
 def data_semua(table):
@@ -54,7 +83,15 @@ def data_semua(table):
     data_list = [v for v in table.values()]
     # Menampilkan database penumpang dalam format tabulasi
     if not data_list:
-        print(f'Database kosong, silahkan tambahkan data.')
+        print(f'\nDatabase kosong, silahkan tambahkan data.\n')
+        pilihan_tambah = validasi_str(f'Apakah Anda ingin menambahkan data [Yes/No]: ').upper()
+        if pilihan_tambah == 'YES' or pilihan_tambah == 'Y':
+            tambah_data(table)
+        elif pilihan_tambah == 'NO' or pilihan_tambah == 'N':
+            return
+        else: #kembali ke menu utama
+            print(f"\nMasukkan 'Yes[Y]' atau 'No[N]'!")
+        
     else:
         convert_to_table(
             data=data_list, 
@@ -88,17 +125,17 @@ def nomor_2(pilihan):
     while True:
         print('''
         ======== Registrasi Data Penumpang ========
-        1. Tambah Data Baru
+        1. Registrasi Penumpang Baru
         2. Kembali ke Menu Utama
         =======================================
         ''')
-        pilihan = validasi_int('Silahkan tentukan pilihan Anda [1-2]: ')
+        pilihan = validasi_int('\nSilahkan tentukan pilihan Anda [1-2]: ')
         if pilihan == 1:
             tambah_data(__main__.database)
         elif pilihan == 2:
             return
         else:
-            print(f'*****Pilihan {pilihan} tidak terdapat di daftar!*****')
+            print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
     
 def tambah_data(table):
     """Fungsi untuk menambah data penumpang baru"""
@@ -110,7 +147,7 @@ def tambah_data(table):
         NIK = input("\nMasukkan Nomor Induk Kependudukan (NIK) 16 digit untuk menambah data baru: ")
         if len(NIK) == 16 and NIK.isdigit():
             if NIK in list_NIK:
-                print(f"Data untuk NIK:'{NIK}' sudah ada, silahkan masukkan NIK yang lain")
+                print(f"\nData untuk NIK:'{NIK}' sudah ada, silahkan masukkan NIK yang lain")
             else:
                 break
         else:
@@ -123,19 +160,17 @@ def tambah_data(table):
             break
         else:
             print("\nKode penerbangan yang Anda masukkan tidak sesuai")
-    input_ori_airport = validasi_str("\nMasukkan bandara keberangkatan baru: ")
-    ori_airport = ' '.join(word.capitalize() if word.isalpha() else word.upper() for word in input_ori_airport.split())
-    input_dest_airport = validasi_str("\nMasukkan bandara penerbangan tujuan: ")
-    dest_airport = ' '.join(word.capitalize() if word.isalpha() else word.upper() for word in input_dest_airport.split())
-    ori_region = validasi_str("\nMasukkan daerah asal: ").title()
+    ori_airport = validasi_str("\nMasukkan bandara keberangkatan baru: ").upper()
+    dest_airport = validasi_str("\nMasukkan bandara penerbangan tujuan: ").upper()
+    ori_region = validasi_str("\nMasukkan daerah keberangkatan: ").title()
     dest_region = validasi_str("\nMasukkan daerah tujuan: ").title()
-    dep_time = input("\nMasukkan waktu keberangkatan dalam format 'jam:menit' (contoh: 10:25): ")
-    ar_time = input("\nMasukkan waktu kedatangan dalam format 'jam:menit' (contoh: 10:25): ")
-    date = input("\nMasukkan tanggal penerbangan dengan format 'tahun-bulan-tanggal' (contoh: 2024-01-14): ")
+    dep_time = validasi_waktu("\nMasukkan waktu keberangkatan dalam format 'jam:menit' (contoh: 10:25): ")
+    ar_time = validasi_waktu("\nMasukkan waktu kedatangan dalam format 'jam:menit' (contoh: 10:25): ")
+    date = validasi_tanggal("\nMasukkan tanggal penerbangan dengan format 'tahun-bulan-tanggal' (contoh: 2024-01-14): ")
 
     # Meminta konfirmasi untuk menyimpan data
     while True:
-        konfirmasi = validasi_str('Apakah Anda yakin untuk menyimpan data? [Yes/No]: ').upper()
+        konfirmasi = validasi_str('\nApakah Anda yakin untuk menyimpan data? [Yes/No]: ').upper()
         if konfirmasi == 'Y' or konfirmasi == 'YES':
             print('Data Berhasil Tersimpan')
             table[NIK] = [
@@ -169,13 +204,13 @@ def nomor_3(pilihan):
         2. Kembali ke Menu Utama
         =======================================
         ''')
-        pilihan = validasi_int('Silahkan tentukan pilihan Anda [1-2]: ')
+        pilihan = validasi_int('\nSilahkan tentukan pilihan Anda [1-2]: ')
         if pilihan == 1:
             ubah_data(__main__.database)
         elif pilihan == 2:
             return
         else:
-            print(f'*****Pilihan {pilihan} tidak terdapat di daftar!*****')
+            print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
             
 def ubah_data(table):
     """Fungsi untuk mengubah data penumpang"""
@@ -196,9 +231,9 @@ def ubah_data(table):
     print("2. Nomor Induk Kependudukan")
     print("3. Maskapai Penerbangan")
     print("4. Kode Penerbangan")
-    print("5. Bandara Asal")
+    print("5. Bandara Keberangkatan")
     print("6. Bandara Tujuan")
-    print("7. Kota Asal")
+    print("7. Kota Keberangkatan")
     print("8. Kota Tujuan")
     print("9. Waktu Keberangkatan")
     print("10. Waktu Tiba")
@@ -207,11 +242,11 @@ def ubah_data(table):
     # Meminta pilihan kolom yang kana diubah
     while True:
         pilihan = validasi_int("\nSilahkan masukkan angka dari kolom data yang ingin Anda ubah: ")
-        if pilihan.isdigit() and 1 <= pilihan <= 11:
-            break
-        else:
+        if not 1 <= pilihan <= 11:
             print("\nAngka yang Anda pilih tidak terdapat di daftar.")
-
+        else:
+            break
+            
     # Meminta data baru untuk kolom yang dipilih
     if pilihan == 1:
         update = validasi_str('\nMasukkan nama penumpang yang baru: ').title()
@@ -232,23 +267,23 @@ def ubah_data(table):
             else:
                 print("\nKode penerbangan yang Anda masukkan tidak sesuai")
     elif pilihan == 5:
-        update = validasi_str("\nMasukkan bandara keberangkatan yang baru: ").title()
+        update = validasi_str("\nMasukkan bandara keberangkatan yang baru: ").upper()
     elif pilihan == 6:
-        update = validasi_str("\nMasukkan bandara tujuan yang baru: ").title()
+        update = validasi_str("\nMasukkan bandara tujuan yang baru: ").upper()
     elif pilihan == 7:
-        update = validasi_str("\nMasukkan kota asal yang baru: ").title()
+        update = validasi_str("\nMasukkan kota keberangkatan yang baru: ").title()
     elif pilihan == 8:
         update = validasi_str("\nMasukkan kota tujuan yang baru: ").title
     elif pilihan == 9:
-        update = input("\nMasukkan waktu keberangkatan yang baru dalam format 'jam:menit' (contoh: 10:25): ")
+        update = validasi_waktu("\nMasukkan waktu keberangkatan yang baru dalam format 'jam:menit' (contoh: 10:25): ")
     elif pilihan == 10:
-        update = input("\nMasukkan waktu tiba yang baru dalam format 'jam:menit' (contoh: 10:25): ")
+        update = validasi_waktu("\nMasukkan waktu tiba yang baru dalam format 'jam:menit' (contoh: 10:25): ")
     elif pilihan == 11:
-        update = input("\nMasukkan tanggal penerbangan yang baru dengan format 'tahun-bulan-tanggal' (contoh: 2024-01-14): ")
+        update = validasi_tanggal("\nMasukkan tanggal penerbangan yang baru dengan format 'tahun-bulan-tanggal' (contoh: 2024-01-14): ")
 
     # Konfirmasi untuk mengubah data
     while True:
-        konfirmasi = validasi_str('Apakah Anda yakin data akan disimpan [Yes/No]: ').upper()
+        konfirmasi = validasi_str('\nApakah Anda yakin data akan disimpan [Yes/No]: ').upper()
         if konfirmasi == 'Y' or konfirmasi == 'YES':
             print('\nData Berhasil Tersimpan!')
             # Melakukan ubah data di database
@@ -293,13 +328,13 @@ def nomor_4(pilihan):
         2. Kembali ke Menu Utama
         =======================================
         ''')
-        pilihan = validasi_int('Silahkan tentukan pilihan Anda [1-2]: ')
+        pilihan = validasi_int('\nSilahkan tentukan pilihan Anda [1-2]: ')
         if pilihan == 1:
             hapus_data(__main__.database)
         elif pilihan == 2:
             return
         else:
-            print(f'*****Pilihan {pilihan} tidak terdapat di daftar!*****')
+            print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
             
     
 def hapus_data(table):
