@@ -53,11 +53,14 @@ def data_semua(table):
     # Mengkonversi dictionary menjadi list of dictionary
     data_list = [v for v in table.values()]
     # Menampilkan database penumpang dalam format tabulasi
-    convert_to_table(
-        data=data_list, 
-        columns=['Nomor', 'Nama Penumpang', 'Nomor Induk\nKependudukan', 'Maskapai\nPenerbangan', 'Kode\nPenerbangan', 'Bandara\nKeberangkatan', 'Bandara Tujuan', 'Kota\nKeberangkatan', 'Kota Tujuan', 'Waktu\nKeberangakatan', 'Waktu Tiba', 'Tanggal'],
-        title=f'\nBerikut Daftar Semua Penumpang:\n'
-        )
+    if not data_list:
+        print(f'Database kosong, silahkan tambahkan data.')
+    else:
+        convert_to_table(
+            data=data_list, 
+            columns=['Nomor', 'Nama Penumpang', 'Nomor Induk\nKependudukan', 'Maskapai\nPenerbangan', 'Kode\nPenerbangan', 'Bandara\nKeberangkatan', 'Bandara Tujuan', 'Kota\nKeberangkatan', 'Kota Tujuan', 'Waktu\nKeberangakatan', 'Waktu Tiba', 'Tanggal'],
+            title=f'\nBerikut Daftar Semua Penumpang:\n'
+            )
     
 def data_tertentu(table):
     """Fungsi untuk menampilkan daftar penumpang tertentu."""
