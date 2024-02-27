@@ -1,4 +1,6 @@
-<img src="./docs/border.gif" alt="Header" width="200" height="100">
+<p align="center">
+  <img src="./docs/border.gif" alt="Header" width="500" height="250">
+</p>
 
 **e-MotorMabur** ***Teman penerbanganmu***:Aplikasi Inovatif untuk Pencatatan Penumpang Pesawat
 
