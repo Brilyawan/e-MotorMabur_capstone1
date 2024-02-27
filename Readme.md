@@ -1,17 +1,26 @@
 ![Header](./docs/border.gif)
 
+**e-MotorMabur** ***Teman penerbanganmu***:Aplikasi Inovatif untuk Pencatatan Penumpang Pesawat
+
 ## Tentang Aplikasi
 
-e-MotorMabur adalah aplikasi yang dirilis pada 2024 dan dibangun oleh PT. Mobar Mabur Sejahtera. Membantu perusahaan untuk melakukan pencatatan data penumpang pesawat agar lebih efisien. e-MotorMabur sangat mudah untuk dijalankan dan mudah dimengerti. e-MotorMabur memiliki empat fitur penting yaitu:
+e-MotorMabur merupakan sebuah aplikasi revolusioner yang dirilis pada tahun 2024 oleh PT. Mobar Mabur Sejahtera. Dibangun dengan dedikasi tinggi, aplikasi ini bertujuan untuk mendukung outlet pembelian tiket pesawat dalam melakukan pencatatan data penumpang pesawat secara efisien. Dengan demikian, mereka dapat memberikan pelayanan yang lebih cepat dan meningkatkan omset bisnis mereka.
 
-1. **Daftar Penumpang**, e-MotorMabur menyajikan data penumpang secara keseluruhan, dan juga menampilkan data penumpang sesuai Nomor Induk Kependudukan (NIK) yang Anda masukkan, serta akan selalu mendapatkan data terbaru dari database Anda.
-2. **Registrasi Data Penumpang**, e-MotorMabur membantu Anda melakukan registrasi untuk data penumpang baru dengan segala data pribadi yang dibutuhkan.
-3. **Ubah Data Penumpang**, e-MotorMabur memberikan fitur untuk mengubah semua data yang sudah diregistrasi menggunakan Nomor Induk Kependudukan (NIK) sebagai acuan.FruitMarket provides high mobility to remove items that you do not need or have expired.
-4. **Hapus Data Penumpang**, e-MotorMabur juga memberikan fitur hapus data untuk data yang sudah tidak diinginkan atau dibutuhkan.
+## Kemudahan Penggunaan
+
+e-MotorMabur dirancang dengan antarmuka yang intuitif, memastikan bahwa pengguna dari berbagai latar belakang dapat dengan mudah mengoperasikan aplikasi ini. Ditambah lagi, bahasa yang digunakan dalam aplikasi ini sangatlah sederhana dan mudah dipahami oleh semua pengguna.
+
+## Fitur Utama
+Aplikasi ini menyajikan empat fitur penting yang menjadi andalan, yaitu:
+
+1. **Daftar Penumpang**: e-MotorMabur memudahkan Anda dalam mengakses data penumpang secara komprehensif. Anda dapat melihat seluruh daftar penumpang, dan dengan cepat menemukan data penumpang tertentu dengan memasukkan Nomor Induk Kependudukan (NIK). Selain itu, aplikasi ini selalu menyajikan data terbaru dari database Anda, memastikan keakuratan informasi yang Anda dapatkan.
+2. **Registrasi Data Penumpang**: e-MotorMabur menawarkan kemudahan registrasi untuk data penumpang baru. Anda dapat mengisi semua data pribadi yang dibutuhkan dengan cepat dan aman. Proses registrasi yang efisien memastikan bahwa data tersimpan dengan akurat dan terstruktur.
+3. **Ubah Data Penumpang**: e-MotorMabur memberikan Anda fleksibilitas untuk mengubah data penumpang yang sudah diregistrasi sebelumnya. Dengan menggunakan Nomor Induk Kependudukan (NIK) sebagai referensi, Anda dapat memperbarui informasi apa pun sesuai kebutuhan Anda.
+4. **Hapus Data Penumpang**: Fitur ini memungkinkan Anda untuk menghapus data penumpang yang sudah tidak relevan atau tidak diinginkan lagi. Dengan mudah, Anda dapat membersihkan database Anda dari entri yang tidak perlu, menjaga kebersihan dan keteraturan informasi.
 
 ## Cara Install
 
-Untuk mengakses proyek ini, kamu dapat melakukan ***clone*** dengan menjalankan kode berikut:
+Untuk mengakses proyek ini, Anda dapat melakukan ***clone*** dengan menjalankan perintah berikut:
 
     git clone git@github.com:Brilyawan/e-MotorMabur_capstone1.git
 
@@ -20,17 +29,19 @@ Untuk mengakses proyek ini, kamu dapat melakukan ***clone*** dengan menjalankan 
 
 Struktur direktori dari proyek e-MotorMabur sebagai berikut:
 
-    ├── README.md          <- README untuk pengembang yang menggunakan proyek ini.
+    ├── README.md          <- File README untuk pengembang yang menggunakan proyek ini.
     │
-    ├── data               <- Database data penumpang pesawat.
+    ├── data               <- Direktori yang berisi database data penumpang pesawat.
     │
-    ├── docs               <- Dokumen berisi presentasi dan gambar terkait proyek.
+    ├── docs               <- Direktori yang berisi dokumen presentasi dan gambar terkait proyek.
     │
-    ├── src                <- Sumber kode untuk fungsi yang digunakan di proyek ini.
+    ├── src                <- Direktori yang berisi sumber kode untuk fungsi yang digunakan di proyek ini.
     │
     └── requirements.txt   <- File persyaratan untuk mengakses bahasa pemrograman yang dibutuhkan,
-                              dapat diakses dengan cara `pip freeze > requiremen.txt`
+                              dapat diakses dengan cara `pip freeze > requirements.txt`
 
 ## Kontribusi
 
-Jika Anda ingin berkontribusi pada Aplikasi e-MotorMabur, lihat github.com/Brilyawan/e-MotorMabur_capstone1.git, atau jangan ragu untuk menghubungi saya.
+Jika Anda tertarik untuk berkontribusi pada Aplikasi e-MotorMabur, silakan kunjungi github.com/Brilyawan/e-MotorMabur_capstone1.git, atau jangan ragu untuk menghubungi saya. Kami selalu menyambut kontribusi dan ide baru!
+
+Dengan proyek yang menarik ini, Anda dapat belajar dan berkontribusi pada pengembangan aplikasi yang berguna untuk banyak orang. Ayo gabung dan berikan kontribusi terbaik Anda!
