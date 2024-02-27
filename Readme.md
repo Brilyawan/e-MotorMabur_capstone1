@@ -13,6 +13,7 @@ e-MotorMabur merupakan sebuah aplikasi revolusioner yang dirilis pada tahun 2024
 e-MotorMabur dirancang dengan antarmuka yang intuitif, memastikan bahwa pengguna dari berbagai latar belakang dapat dengan mudah mengoperasikan aplikasi ini. Ditambah lagi, bahasa yang digunakan dalam aplikasi ini sangatlah sederhana dan mudah dipahami oleh semua pengguna.
 
 ## Fitur Utama
+
 Aplikasi ini menyajikan empat fitur penting yang menjadi andalan, yaitu:
 
 1. **Daftar Penumpang**: e-MotorMabur memudahkan Anda dalam mengakses data penumpang secara komprehensif. Anda dapat melihat seluruh daftar penumpang, dan dengan cepat menemukan data penumpang tertentu dengan memasukkan Nomor Induk Kependudukan (NIK). Selain itu, aplikasi ini selalu menyajikan data terbaru dari database Anda, memastikan keakuratan informasi yang Anda dapatkan.
@@ -40,7 +41,6 @@ Struktur direktori dari proyek e-MotorMabur sebagai berikut:
     ├── src                <- Direktori yang berisi sumber kode untuk fungsi yang digunakan di proyek ini.
     │
     └── requirements.txt   <- File persyaratan untuk mengakses bahasa pemrograman yang dibutuhkan,
-                              dapat diakses dengan cara `pip freeze > requirements.txt`
                               dapat diakses dengan cara `pip freeze > requirements.txt`
 
 ## Kontribusi
