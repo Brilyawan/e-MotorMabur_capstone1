@@ -1,4 +1,4 @@
-![Header](./docs/border.gif)
+<img src="./docs/border.gif" alt="Header" width="200" height="100">
 
 **e-MotorMabur** ***Teman penerbanganmu***:Aplikasi Inovatif untuk Pencatatan Penumpang Pesawat
 
