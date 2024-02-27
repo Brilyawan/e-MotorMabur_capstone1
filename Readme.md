@@ -1,6 +1,6 @@
 ![Header](./docs/border.gif)
 
-## Tentang Aplikasi
+## Tentang Aplikasi ini
 
 e-MotorMabur adalah aplikasi yang dirilis pada 2024 dan dibangun oleh PT. Mobar Mabur Sejahtera. Membantu perusahaan untuk melakukan pencatatan data penumpang pesawat agar lebih efisien. e-MotorMabur sangat mudah untuk dijalankan dan mudah dimengerti. e-MotorMabur memiliki empat fitur penting yaitu:
 
