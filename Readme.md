@@ -39,6 +39,7 @@ Struktur direktori dari proyek e-MotorMabur sebagai berikut:
     │
     └── requirements.txt   <- File persyaratan untuk mengakses bahasa pemrograman yang dibutuhkan,
                               dapat diakses dengan cara `pip freeze > requirements.txt`
+                              dapat diakses dengan cara `pip freeze > requirements.txt`
 
 ## Kontribusi
 
