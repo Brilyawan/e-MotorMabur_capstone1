@@ -319,7 +319,7 @@ def ubah_data(table):
                     elif pilihan == 7:
                         update = validasi_str("\nMasukkan kota keberangkatan yang baru: ").title()
                     elif pilihan == 8:
-                        update = validasi_str("\nMasukkan kota tujuan yang baru: ").title
+                        update = validasi_str("\nMasukkan kota tujuan yang baru: ").title()
                     elif pilihan == 9:
                         update = validasi_waktu("\nMasukkan waktu keberangkatan yang baru dalam format 'jam:menit' (contoh: 10:25): ")
                     elif pilihan == 10:
