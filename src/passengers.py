@@ -61,7 +61,7 @@ def validasi_tanggal(prompt):
             continue
         return date_input            
 
-def convert_to_table(data, columns, title):
+def ubah_ke_tabel(data, columns, title):
     """
     Fungsi untuk mengkonversi data yang ada menjadi tabel.
     """
@@ -86,32 +86,30 @@ def nomor_1(pilihan):
         elif pilihan == 2:
             data_tertentu(__main__.database)
         elif pilihan == 3:
+            __main__.clear_screen()
             return
         else:
-            print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
+            print(f'\n*****Pilihan {int(pilihan)} tidak terdapat di daftar!*****')
             
                 
 def data_semua(table):
     """
     Fungsi untuk menampilkan semua daftar penumpang.
     """
-    # Mengkonversi dictionary menjadi list of dictionary
-    data_list = [v for v in table.values()]
-    # Menampilkan database penumpang dalam format tabulasi
-    if not data_list:
+    if not __main__.database.values():
         print(f'\nDatabase kosong, silahkan tambahkan data.\n')
-        pilihan_tambah = validasi_str(f'Apakah Anda ingin menambahkan data [Yes/No]: ').upper()
+        pilihan_tambah = validasi_str(f'Apakah Anda ingin menambahkan data [Yes(Y)/No(N)]: ').upper()
         if pilihan_tambah == 'YES' or pilihan_tambah == 'Y':
             tambah_data(table)
         elif pilihan_tambah == 'NO' or pilihan_tambah == 'N':
             return
-        else: #kembali ke menu utama
+        else: 
             print(f"\nMasukkan 'Yes[Y]' atau 'No[N]'!")
         
     else:
-        convert_to_table(
-            data=data_list, 
-            columns=['Nomor', 'Nama Penumpang', 'Nomor Induk\nKependudukan', 'Maskapai\nPenerbangan', 'Kode\nPenerbangan', 'Bandara\nKeberangkatan', 'Bandara Tujuan', 'Kota\nKeberangkatan', 'Kota Tujuan', 'Waktu\nKeberangakatan', 'Waktu Tiba', 'Tanggal'],
+        ubah_ke_tabel(
+            data=__main__.database.values(), 
+            columns=['Nama Penumpang', 'Nomor Induk\nKependudukan', 'Maskapai\nPenerbangan', 'Kode\nPenerbangan', 'Kode\nBandara\nKeberangkatan', 'Kode\nBandara Tujuan', 'Kota\nKeberangkatan', 'Kota Tujuan', 'Waktu\nKeberangakatan', 'Waktu Tiba', 'Tanggal'],
             title=f'\nBerikut Daftar Semua Penumpang:\n'
             )
     
@@ -120,19 +118,16 @@ def data_tertentu(table):
     Fungsi untuk menampilkan daftar penumpang tertentu.
     """
     while True:
-    # Meminta input NIK untuk melakukan filter
         NIK = input("\nMasukkan Nomor Induk Kependudukan (NIK) 16 digit untuk mencari data penumpang: ")
         if len(NIK) == 16 and NIK.isdigit():
             break
         else:
             print("\nNIK harus berupa angka dan terdiri dari 16 digit. Silakan coba lagi.")
-    # Mencari data penumpang berdasarkan NIK
     data_penumpang = table.get(NIK)
-    # Menampilkan data penumpang jika ditemukan
     if data_penumpang:
-        convert_to_table(
+        ubah_ke_tabel(
         data=[data_penumpang], 
-        columns=['Nomor', 'Nama Penumpang', 'Nomor Induk\nKependudukan', 'Maskapai\nPenerbangan', 'Kode\nPenerbangan', 'Bandara\nKeberangkatan', 'Bandara Tujuan', 'Kota\nKeberangkatan', 'Kota Tujuan', 'Waktu\nKeberangakatan', 'Waktu Tiba', 'Tanggal'],
+        columns=['Nama Penumpang', 'Nomor Induk\nKependudukan', 'Maskapai\nPenerbangan', 'Kode\nPenerbangan', 'Kode\nBandara\nKeberangkatan', 'Kode\nBandara Tujuan', 'Kota\nKeberangkatan', 'Kota Tujuan', 'Waktu\nKeberangakatan', 'Waktu Tiba', 'Tanggal'],
         title=f'\nBerikut Daftar Penumpang dengan NIK: {NIK}\n'
         )
     else:
@@ -153,9 +148,10 @@ def nomor_2(pilihan):
         if pilihan == 1:
             tambah_data(__main__.database)
         elif pilihan == 2:
+            __main__.clear_screen()
             return
         else:
-            print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
+            print(f'\n*****Pilihan {int(pilihan)} tidak terdapat di daftar!*****')
     
 def tambah_data(table):
     """
@@ -174,25 +170,41 @@ def tambah_data(table):
     name = validasi_str('\nMasukkan nama penumpang baru: ').title()
     airlane = validasi_str('\nMasukkan nama maskapai penerbangan: ').title()  
     while True:
-        flight_code = input("\nMasukkan kode penerbangan: ").upper()
-        if flight_code.isalnum() and any(c.isalpha() for c in flight_code) and any(c.isdigit() for c in flight_code):
+        flight_code = input("\nMasukkan kode penerbangan (contoh: JT2098): ").upper()
+        if len(flight_code) == 6 and flight_code.isalnum() and any(c.isalpha() for c in flight_code) and any(c.isdigit() for c in flight_code):
             break
         else:
-            print("\nKode penerbangan yang Anda masukkan tidak sesuai")
-    ori_airport = validasi_str("\nMasukkan bandara keberangkatan baru: ").upper()
-    dest_airport = validasi_str("\nMasukkan bandara penerbangan tujuan: ").upper()
+            print("\nKode penerbangan tidak sesuai, harus terdiri dari dua huruf dan empat angka (contoh: JT1234)")
+    while True:
+        ori_airport = validasi_str("\nMasukkan kode bandara keberangkatan (contoh: CGK): ").upper()
+        if len(ori_airport) == 3:
+            break
+        else:
+            print("\nKode bandara harus terdiri dari 3 huruf. Silakan coba lagi.")
+    while True:
+        dest_airport = validasi_str("\nMasukkan bandara penerbangan tujuan (contoh: CGK): ").upper()
+        if len(ori_airport) == 3:
+            break
+        else:
+            print("\nKode bandara harus terdiri dari 3 huruf. Silakan coba lagi.")
     ori_region = validasi_str("\nMasukkan daerah keberangkatan: ").title()
     dest_region = validasi_str("\nMasukkan daerah tujuan: ").title()
     dep_time = validasi_waktu("\nMasukkan waktu keberangkatan dalam format 'jam:menit' (contoh: 10:25): ")
     ar_time = validasi_waktu("\nMasukkan waktu kedatangan dalam format 'jam:menit' (contoh: 10:25): ")
     date = validasi_tanggal("\nMasukkan tanggal penerbangan dengan format 'tahun-bulan-tanggal' (contoh: 2024-01-14): ")
-
+    data_baru = ({NIK: [name, int(NIK), str(airlane), str(flight_code), str(ori_airport), str(dest_airport), str(ori_region), str(dest_region), str(dep_time), str(ar_time), str(date)]})
+    
+    ubah_ke_tabel(
+            data=data_baru.values(), 
+            columns=['Nama Penumpang', 'Nomor Induk\nKependudukan', 'Maskapai\nPenerbangan', 'Kode\nPenerbangan', 'Kode\nBandara\nKeberangkatan', 'Kode\nBandara Tujuan', 'Kota\nKeberangkatan', 'Kota Tujuan', 'Waktu\nKeberangakatan', 'Waktu Tiba', 'Tanggal'],
+            title=f'\nBerikut Data Penumpang Baru:\n'
+            )
+    
     while True:
-        konfirmasi = validasi_str('\nApakah Anda yakin untuk menyimpan data? [Yes/No]: ').upper()
+        konfirmasi = validasi_str('\nApakah Anda yakin untuk menyimpan data? [Yes(Y)/No(N)]: ').upper()
         if konfirmasi == 'Y' or konfirmasi == 'YES':
             print('Data Berhasil Tersimpan')
             table[NIK] = [
-                len(table) + 1,
                 name, 
                 int(NIK),
                 airlane, 
@@ -226,9 +238,10 @@ def nomor_3(pilihan):
         if pilihan == 1:
             ubah_data(__main__.database)
         elif pilihan == 2:
+            __main__.clear_screen()
             return
         else:
-            print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
+            print(f'\n*****Pilihan {int(pilihan)} tidak terdapat di daftar!*****')
             
 def ubah_data(table):
     """
@@ -236,103 +249,125 @@ def ubah_data(table):
     """
     while True:
         NIK = input("\nMasukkan Nomor Induk Kependudukan(NIK) untuk data penumpang yang ingin diubah: ")
-        if len(NIK) == 16 and NIK.isdigit():
-            if NIK in table:
-                break
-            else:
-                print(f"\nData untuk NIK:'{NIK}' tidak tersedia. Silahkan masukkan NIK yang sesuai.")
-        else:
-            print("\nNIK harus berupa angka dan terdiri dari 16 digit. Silakan coba lagi.")
+        if NIK in table:
+            data_penumpang = table.get(NIK)
+            ubah_ke_tabel(
+                data=[data_penumpang], 
+                columns=['Nama Penumpang', 'Nomor Induk\nKependudukan', 'Maskapai\nPenerbangan', 'Kode\nPenerbangan', 'Kode\nBandara\nKeberangkatan', 'Kode\nBandara Tujuan', 'Kota\nKeberangkatan', 'Kota Tujuan', 'Waktu\nKeberangkatan', 'Waktu Tiba', 'Tanggal'],
+                title=f'\nBerikut Daftar Penumpang dengan NIK: {NIK}\n'
+            )
+            while True:
+                konfirmasi = input("\nApakah Anda ingin mengubah data penumpang ini [Yes(Y)/No(N)]: ").upper()
+                if konfirmasi == 'Y' or konfirmasi == 'YES':
+                    print("\nSilahkan pilih kolom data yang ingin Anda ubah:")
+                    print("1. Nama")
+                    print("2. Nomor Induk Kependudukan")
+                    print("3. Maskapai Penerbangan")
+                    print("4. Kode Penerbangan")
+                    print("5. Kode bandara keberangkatan")
+                    print("6. Bandara Tujuan")
+                    print("7. Kota Keberangkatan")
+                    print("8. Kota Tujuan")
+                    print("9. Waktu Keberangkatan")
+                    print("10. Waktu Tiba")
+                    print("11. Tanggal Penerbangan")
 
-    print("\nSilahkan pilih kolom data yang ingin Anda ubah:")
-    print("1. Nama")
-    print("2. Nomor Induk Kependudukan")
-    print("3. Maskapai Penerbangan")
-    print("4. Kode Penerbangan")
-    print("5. Bandara Keberangkatan")
-    print("6. Bandara Tujuan")
-    print("7. Kota Keberangkatan")
-    print("8. Kota Tujuan")
-    print("9. Waktu Keberangkatan")
-    print("10. Waktu Tiba")
-    print("11. Tanggal Penerbangan")
+                    while True:
+                        pilihan = input("\nSilahkan masukkan angka dari kolom data yang ingin Anda ubah: ")
+                        if pilihan.isdigit() and 1 <= int(pilihan) <= 11:
+                            pilihan = int(pilihan)
+                            break
+                        else:
+                            print("\nYang Anda pilih tidak terdapat di daftar.")
+                    
+                    if pilihan == 1:
+                        update = validasi_str('\nMasukkan nama penumpang yang baru: ').title()
+                    elif pilihan == 2:
+                        list_NIK = [nik for nik, data in table.items()]
+                        while True:
+                            NIK = input("\nMasukkan Nomor Induk Kependudukan (NIK) 16 digit untuk menambah data baru: ")
+                            if len(NIK) == 16 and NIK.isdigit():
+                                if NIK in list_NIK:
+                                    print(f"\nNIK:'{NIK}' sudah ada, silahkan masukkan NIK yang lain.")
+                                else:
+                                    break
+                            else:
+                                print("\nNIK harus berupa angka dan terdiri dari 16 digit. Silakan coba lagi.")
+                    elif pilihan == 3:
+                        update = validasi_str("\nMasukkan maskapai penerbangan yang baru: ").title()
+                    elif pilihan == 4:
+                        while True:
+                            update = input("\nMasukkan kode penerbangan yang baru: ").upper()
+                            if len(update) == 6 and update.isalnum() and any(c.isalpha() for c in update) and any(c.isdigit() for c in update):
+                                break
+                            else:
+                                print("\nKode penerbangan tidak sesuai, harus terdiri dari dua huruf dan empat angka (contoh: JT1234)")
+                    elif pilihan == 5:
+                        while True:
+                            update = validasi_str("\nMasukkan kode bandara keberangkatan yang baru: ").upper()
+                            if len(update) == 3:
+                                break
+                            else:
+                                print("\nKode bandara harus terdiri dari 3 huruf. Silakan coba lagi.")
+                    elif pilihan == 6:
+                        while True:
+                            update = validasi_str("\nMasukkan bandara tujuan yang baru: ").upper()
+                            if len(update) == 3:
+                                break
+                            else:
+                                print("\nKode bandara harus terdiri dari 3 huruf. Silakan coba lagi.")
+                    elif pilihan == 7:
+                        update = validasi_str("\nMasukkan kota keberangkatan yang baru: ").title()
+                    elif pilihan == 8:
+                        update = validasi_str("\nMasukkan kota tujuan yang baru: ").title
+                    elif pilihan == 9:
+                        update = validasi_waktu("\nMasukkan waktu keberangkatan yang baru dalam format 'jam:menit' (contoh: 10:25): ")
+                    elif pilihan == 10:
+                        update = validasi_waktu("\nMasukkan waktu tiba yang baru dalam format 'jam:menit' (contoh: 10:25): ")
+                    elif pilihan == 11:
+                        update = validasi_tanggal("\nMasukkan tanggal penerbangan yang baru dengan format 'tahun-bulan-tanggal' (contoh: 2024-01-14): ")
 
-    while True:
-        pilihan = validasi_int("\nSilahkan masukkan angka dari kolom data yang ingin Anda ubah: ")
-        if not 1 <= pilihan <= 11:
-            print("\nAngka yang Anda pilih tidak terdapat di daftar.")
+                    while True:
+                        konfirmasi = input('\nApakah Anda yakin data akan disimpan [Yes(Y)/No(N)]: ').upper()
+                        if konfirmasi == 'Y' or konfirmasi == 'YES':
+                            print('\nData Berhasil Tersimpan!')
+                            if pilihan == 1:
+                                table[NIK][0] = update
+                            elif pilihan == 2:
+                                table[NIK][1] = update    
+                            elif pilihan == 3:
+                                table[NIK][2] = update
+                            elif pilihan == 4:
+                                table[NIK][3] = update
+                            elif pilihan == 5:
+                                table[NIK][4] = update
+                            elif pilihan == 6:
+                                table[NIK][5] = update
+                            elif pilihan == 7:
+                                table[NIK][6] = update
+                            elif pilihan == 8:
+                                table[NIK][7] = update
+                            elif pilihan == 9:
+                                table[NIK][8] = update
+                            elif pilihan == 10:
+                                table[NIK][9] = update
+                            elif pilihan == 11:
+                                table[NIK][10] = update
+                            data_semua(table)
+                            return
+                        elif konfirmasi == 'N' or konfirmasi == 'NO':
+                            print('\nData Gagal Tersimpan!')
+                            return 
+                        else:
+                            print(f"\nMasukkan 'Yes[Y]' atau 'No[N]'!")
+                elif konfirmasi == 'N' or konfirmasi == 'NO':
+                    print('\nBatal mengubah data.')
+                    return
+                else:
+                    print("\nMasukkan 'Yes[Y]' atau 'No[N]'!")
         else:
-            break
+            print(f"\nData untuk NIK:'{NIK}' tidak tersedia. Silahkan masukkan NIK yang sesuai.")
             
-    if pilihan == 1:
-        update = validasi_str('\nMasukkan nama penumpang yang baru: ').title()
-    elif pilihan == 2:
-        while True:
-            update = input("\nMasukkan Nomor Induk Kependudukan(NIK) yang baru: ")
-            if len(NIK) == 16 and NIK.isdigit():
-                break
-            else:
-                print("\nNIK harus berupa angka dan terdiri dari 16 digit. Silakan coba lagi.")
-    elif pilihan == 3:
-        update = validasi_str("\nMasukkan maskapai penerbangan yang baru: ").title()
-    elif pilihan == 4:
-        while True:
-            update = input("\nMasukkan kode penerbangan yang baru: ").upper()
-            if update.isalnum() and any(c.isalpha() for c in update) and any(c.isdigit() for c in update):
-                break
-            else:
-                print("\nKode penerbangan yang Anda masukkan tidak sesuai")
-    elif pilihan == 5:
-        update = validasi_str("\nMasukkan bandara keberangkatan yang baru: ").upper()
-    elif pilihan == 6:
-        update = validasi_str("\nMasukkan bandara tujuan yang baru: ").upper()
-    elif pilihan == 7:
-        update = validasi_str("\nMasukkan kota keberangkatan yang baru: ").title()
-    elif pilihan == 8:
-        update = validasi_str("\nMasukkan kota tujuan yang baru: ").title
-    elif pilihan == 9:
-        update = validasi_waktu("\nMasukkan waktu keberangkatan yang baru dalam format 'jam:menit' (contoh: 10:25): ")
-    elif pilihan == 10:
-        update = validasi_waktu("\nMasukkan waktu tiba yang baru dalam format 'jam:menit' (contoh: 10:25): ")
-    elif pilihan == 11:
-        update = validasi_tanggal("\nMasukkan tanggal penerbangan yang baru dengan format 'tahun-bulan-tanggal' (contoh: 2024-01-14): ")
-
-    while True:
-        konfirmasi = validasi_str('\nApakah Anda yakin data akan disimpan [Yes/No]: ').upper()
-        if konfirmasi == 'Y' or konfirmasi == 'YES':
-            print('\nData Berhasil Tersimpan!')
-            if pilihan == 1:
-                table[NIK][1] = update
-            elif pilihan == 2:
-                table[NIK][2] = update    
-            elif pilihan == 3:
-                table[NIK][3] = update
-            elif pilihan == 4:
-                table[NIK][4] = update
-            elif pilihan == 5:
-                table[NIK][5] = update
-            elif pilihan == 6:
-                table[NIK][6] = update
-            elif pilihan == 7:
-                table[NIK][7] = update
-            elif pilihan == 8:
-                table[NIK][8] = update
-            elif pilihan == 8:
-                table[NIK][9] = update
-            elif pilihan == 9:
-                table[NIK][10] = update
-            elif pilihan == 11:
-                table[NIK][11] = update
-
-            data_semua(table)
-            break
-        elif konfirmasi == 'N' or konfirmasi == 'NO':
-            print('\nData Gagal Tersimpan!')
-            return 
-        else:
-            print(f"\nMasukkan 'Yes[Y]' atau 'No[N]'!")
-    return
-
 def nomor_4(pilihan):
     while True:
         print('''
@@ -345,11 +380,11 @@ def nomor_4(pilihan):
         if pilihan == 1:
             hapus_data(__main__.database)
         elif pilihan == 2:
+            __main__.clear_screen()
             return
         else:
-            print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
-            
-    
+            print(f'\n*****Pilihan {int(pilihan)} tidak terdapat di daftar!*****')
+               
 def hapus_data(table):
     """
     Fungsi untuk menghapus data penumpang berdasarkan NIK dari database.
@@ -361,9 +396,9 @@ def hapus_data(table):
             found = False
             keys_to_delete = []  
             for key, val in table.items():
-                if val[2] == int(NIK):
+                if val[1] == int(NIK):
                     while True:
-                        konfirmasi = input(f"Apakah Anda yakin ingin menghapus data untuk NIK '{NIK}'? [Yes/No]: ").upper()
+                        konfirmasi = input(f"Apakah Anda yakin ingin menghapus data untuk NIK '{NIK}'? [Yes(Y)/No(N)]: ").upper()
                         if konfirmasi == 'YES' or konfirmasi == 'Y':
                             keys_to_delete.append(key) 
                             print(f"\nData untuk NIK:'{NIK}' berhasil dihapus.")
@@ -383,11 +418,4 @@ def hapus_data(table):
                 break
         else:
             print("\nNIK harus berupa angka dan terdiri dari 16 digit. Silakan coba lagi.")
-
-    """
-    Untuk melakukan pembaharuan nomor urut
-    """ 
-    for idx, item in enumerate(list(table.values())):
-        if idx < item[0]:
-            item[0] -= 1
     data_semua(table)  

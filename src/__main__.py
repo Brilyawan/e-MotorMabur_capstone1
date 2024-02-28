@@ -7,19 +7,22 @@ def clear_screen():
     """
     Untuk membersihkan layar pengguna
     """
-    _ = os.system('clear')
+    if os.name == 'nt':
+        _ = os.system('cls')
+    else:
+        _ = os.system('clear')
 
 def akses_db():
     """
     Untuk mengakses database, memunculkannya dalam bentuk dictionary
     """
     with open(PATH, 'r') as file:
+        print(PATH)
         reader = csv.reader(file, delimiter=";")
         database = {}
         for row in reader:
-            nomor, name, NIK, airlane, flight_code, ori_airport, dest_airport, ori_region, dest_region, dep_time, ar_time, date = row
-            database.update({NIK: [int(nomor), name, int(NIK), str(airlane), str(flight_code), str(ori_airport), str(dest_airport), str(ori_region), str(dest_region), str(dep_time), str(ar_time), str(date)]})
-
+            name, NIK, airlane, flight_code, ori_airport, dest_airport, ori_region, dest_region, dep_time, ar_time, date = row
+            database.update({NIK: [name, int(NIK), str(airlane), str(flight_code), str(ori_airport), str(dest_airport), str(ori_region), str(dest_region), str(dep_time), str(ar_time), str(date)]})
     return database
 
 def main():
@@ -39,7 +42,7 @@ def main():
             passengers.nomor_4(database)
         elif choice == 5:
             clear_screen()
-            print("\n\nTerima kasih sudah menggunakan aplikasi 'e-MotorMabur'.\n\n")
+            print(f"\n\n{'='*70}\n{'='*8} Terima kasih sudah menggunakan aplikasi e-MotorMabur {'='*8}\n{'='*23} by: Kristian Brilyawan {'='*23}\n{'='*70}")
             break
         
         else:
