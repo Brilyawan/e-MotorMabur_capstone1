@@ -2,7 +2,9 @@ from tabulate import tabulate
 import __main__
 
 def validasi_int(prompt):
-    """Fungsi untuk melakukan validasi input integer / angka."""
+    """
+    Fungsi untuk melakukan validasi masukan integer / angka.
+    """
     while True:
         try:
             num = float(input(prompt))
@@ -14,7 +16,9 @@ def validasi_int(prompt):
             print('\nAnda memasukkan selain angka, silahkan masukkan angka yang sesuai.')
 
 def validasi_str(prompt):
-    """Fungsi untuk melakukan validasi input string / huruf."""
+    """
+    Fungsi untuk melakukan validasi masukan string / huruf.
+    """
     while True:
         word = input(prompt)
         if word.replace(' ','').isalpha():
@@ -23,6 +27,9 @@ def validasi_str(prompt):
             print('\nAnda hanya bisa memasukkan karakter alfabet.')
 
 def validasi_waktu(prompt):
+    """
+    Fungsi untuk melakukan validasi masukan format waktu.
+    """
     while True:
         time_input = input(prompt)
         split_time = time_input.split(':')
@@ -37,6 +44,9 @@ def validasi_waktu(prompt):
         return time_input
     
 def validasi_tanggal(prompt):
+    """
+    Fungsi untuk melakukan validasi masukan format tanggal.
+    """
     while True:
         date_input = input(prompt)
         split_date = date_input.split('-')
@@ -52,12 +62,16 @@ def validasi_tanggal(prompt):
         return date_input            
 
 def convert_to_table(data, columns, title):
-    """Fungsi untuk mengkonversi data yang ada menjadi tabel."""
+    """
+    Fungsi untuk mengkonversi data yang ada menjadi tabel.
+    """
     print(title)
     print(tabulate(data, headers=columns, tablefmt="grid"))
 
 def nomor_1(pilihan):
-    """Fungsi menu di pilihan nomor 1"""
+    """
+    Fungsi menu di pilihan nomor 1
+    """
     while True:
         print('''
         ======== Daftar Data Penumpang ========
@@ -78,7 +92,9 @@ def nomor_1(pilihan):
             
                 
 def data_semua(table):
-    """Fungsi untuk menampilkan semua daftar penumpang."""
+    """
+    Fungsi untuk menampilkan semua daftar penumpang.
+    """
     # Mengkonversi dictionary menjadi list of dictionary
     data_list = [v for v in table.values()]
     # Menampilkan database penumpang dalam format tabulasi
@@ -100,7 +116,9 @@ def data_semua(table):
             )
     
 def data_tertentu(table):
-    """Fungsi untuk menampilkan daftar penumpang tertentu."""
+    """
+    Fungsi untuk menampilkan daftar penumpang tertentu.
+    """
     while True:
     # Meminta input NIK untuk melakukan filter
         NIK = input("\nMasukkan Nomor Induk Kependudukan (NIK) 16 digit untuk mencari data penumpang: ")
@@ -121,7 +139,9 @@ def data_tertentu(table):
         print(f"\nData untuk NIK {NIK} tidak ditemukan. Pastikan NIK Anda terdaftar.\n")
         
 def nomor_2(pilihan):
-    """Fungsi menu di pilihan nomor 2"""
+    """
+    Fungsi menu di pilihan nomor 2
+    """
     while True:
         print('''
         ======== Registrasi Data Penumpang ========
@@ -138,11 +158,10 @@ def nomor_2(pilihan):
             print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
     
 def tambah_data(table):
-    """Fungsi untuk menambah data penumpang baru"""
-    # Mengambil daftar NIK yang sudah ada
+    """
+    Fungsi untuk menambah data penumpang baru
+    """
     list_NIK = [nik for nik, data in table.items()]
-
-    # Meminta input NIK untuk data baru
     while True:
         NIK = input("\nMasukkan Nomor Induk Kependudukan (NIK) 16 digit untuk menambah data baru: ")
         if len(NIK) == 16 and NIK.isdigit():
@@ -168,7 +187,6 @@ def tambah_data(table):
     ar_time = validasi_waktu("\nMasukkan waktu kedatangan dalam format 'jam:menit' (contoh: 10:25): ")
     date = validasi_tanggal("\nMasukkan tanggal penerbangan dengan format 'tahun-bulan-tanggal' (contoh: 2024-01-14): ")
 
-    # Meminta konfirmasi untuk menyimpan data
     while True:
         konfirmasi = validasi_str('\nApakah Anda yakin untuk menyimpan data? [Yes/No]: ').upper()
         if konfirmasi == 'Y' or konfirmasi == 'YES':
@@ -191,7 +209,7 @@ def tambah_data(table):
             break
         elif konfirmasi == 'N' or konfirmasi == 'NO':
             print('\nData Gagal Tersimpan')
-            return  # Kembali ke menu utama
+            return  
         else:
             print(f"\nMasukkan 'Yes[Y]' atau 'No[N]'!")
     return
@@ -213,8 +231,9 @@ def nomor_3(pilihan):
             print(f'\n*****Pilihan {pilihan} tidak terdapat di daftar!*****')
             
 def ubah_data(table):
-    """Fungsi untuk mengubah data penumpang"""
-    # Meminta NIK untuk memilih data yang akan diubah data
+    """
+    Fungsi untuk mengubah data penumpang
+    """
     while True:
         NIK = input("\nMasukkan Nomor Induk Kependudukan(NIK) untuk data penumpang yang ingin diubah: ")
         if len(NIK) == 16 and NIK.isdigit():
@@ -225,7 +244,6 @@ def ubah_data(table):
         else:
             print("\nNIK harus berupa angka dan terdiri dari 16 digit. Silakan coba lagi.")
 
-    # Menampilkan pilihan kolom yang akan diubah
     print("\nSilahkan pilih kolom data yang ingin Anda ubah:")
     print("1. Nama")
     print("2. Nomor Induk Kependudukan")
@@ -239,7 +257,6 @@ def ubah_data(table):
     print("10. Waktu Tiba")
     print("11. Tanggal Penerbangan")
 
-    # Meminta pilihan kolom yang kana diubah
     while True:
         pilihan = validasi_int("\nSilahkan masukkan angka dari kolom data yang ingin Anda ubah: ")
         if not 1 <= pilihan <= 11:
@@ -247,7 +264,6 @@ def ubah_data(table):
         else:
             break
             
-    # Meminta data baru untuk kolom yang dipilih
     if pilihan == 1:
         update = validasi_str('\nMasukkan nama penumpang yang baru: ').title()
     elif pilihan == 2:
@@ -281,12 +297,10 @@ def ubah_data(table):
     elif pilihan == 11:
         update = validasi_tanggal("\nMasukkan tanggal penerbangan yang baru dengan format 'tahun-bulan-tanggal' (contoh: 2024-01-14): ")
 
-    # Konfirmasi untuk mengubah data
     while True:
         konfirmasi = validasi_str('\nApakah Anda yakin data akan disimpan [Yes/No]: ').upper()
         if konfirmasi == 'Y' or konfirmasi == 'YES':
             print('\nData Berhasil Tersimpan!')
-            # Melakukan ubah data di database
             if pilihan == 1:
                 table[NIK][1] = update
             elif pilihan == 2:
@@ -310,12 +324,11 @@ def ubah_data(table):
             elif pilihan == 11:
                 table[NIK][11] = update
 
-            # Menampilkan data setelah diubah
             data_semua(table)
             break
         elif konfirmasi == 'N' or konfirmasi == 'NO':
             print('\nData Gagal Tersimpan!')
-            return  # Return to the main menu
+            return 
         else:
             print(f"\nMasukkan 'Yes[Y]' atau 'No[N]'!")
     return
@@ -338,20 +351,21 @@ def nomor_4(pilihan):
             
     
 def hapus_data(table):
-    """Fungsi untuk menghapus data penumpang berdasarkan NIK dari database."""
-    # Menampilkan daftar buah yang tersedia
+    """
+    Fungsi untuk menghapus data penumpang berdasarkan NIK dari database.
+    """
     data_semua(table)
     while True:
         NIK = input("\nMasukkan Nomor Induk Kependudukan(NIK) untuk data penumpang yang ingin dihapus: ")
         if len(NIK) == 16 and NIK.isdigit():
             found = False
-            keys_to_delete = []  # Membuat daftar untuk menyimpan kunci yang akan dihapus
+            keys_to_delete = []  
             for key, val in table.items():
                 if val[2] == int(NIK):
                     while True:
                         konfirmasi = input(f"Apakah Anda yakin ingin menghapus data untuk NIK '{NIK}'? [Yes/No]: ").upper()
                         if konfirmasi == 'YES' or konfirmasi == 'Y':
-                            keys_to_delete.append(key)  # Menambahkan kunci ke daftar hapus
+                            keys_to_delete.append(key) 
                             print(f"\nData untuk NIK:'{NIK}' berhasil dihapus.")
                             found = True
                             break
@@ -360,7 +374,6 @@ def hapus_data(table):
                             return
                         else:
                             print(f"\nMasukkan 'Yes[Y]' atau 'No[N]'!")
-            # Menghapus item dari tabel setelah iterasi selesai
             for key in keys_to_delete:
                 del table[key]
 
@@ -371,9 +384,10 @@ def hapus_data(table):
         else:
             print("\nNIK harus berupa angka dan terdiri dari 16 digit. Silakan coba lagi.")
 
-    # Proses update indeks 
+    """
+    Untuk melakukan pembaharuan nomor urut
+    """ 
     for idx, item in enumerate(list(table.values())):
         if idx < item[0]:
             item[0] -= 1
-    # Menampilkan daftar terkini
     data_semua(table)  

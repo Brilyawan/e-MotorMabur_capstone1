@@ -4,12 +4,15 @@ import csv
 import passengers
 
 def clear_screen():
-    """Untuk membersihkan layar pengguna"""
+    """
+    Untuk membersihkan layar pengguna
+    """
     _ = os.system('clear')
 
-def initialize_db():
+def akses_db():
     """
-    Untuk mengakses database, memunculkannya dalam bentuk dictionary"""
+    Untuk mengakses database, memunculkannya dalam bentuk dictionary
+    """
     with open(PATH, 'r') as file:
         # Membuat objek reader
         reader = csv.reader(file, delimiter=";")
@@ -24,13 +27,11 @@ def initialize_db():
 
 def main():
     """
-    The main program to run the whole process
+    Program utama dari semua program yang ada
     """
     global database
     while True:
-        # Meminta input berupa opsi fitur yang akan dijalankan
         choice = passengers.validasi_int(main_menu)
-        # Jalankan fitur sesuai opsi yang di pilih 
         if choice == 1:
             passengers.nomor_1(database)
         elif choice == 2:
@@ -44,20 +45,21 @@ def main():
             print("\n\nTerima kasih sudah menggunakan aplikasi 'e-MotorMabur'.\n\n")
             break
         
-        # Jika opsi tidak ada, maka minta input ulang
         else:
-            print('Angka yang Anda masukkan diluar jangkauan.\n')
+            print('\nAngka yang Anda masukkan diluar jangkauan.\n')
             continue
 
-        # Menjaga agar database selalu diperbarui
+        """
+        Memastikan data yang berubah akan diperbarui ke database
+        """
         with open(PATH, 'w') as file:
-            # Membuat objek writer
             writer = csv.writer(file, delimiter=";")
-            # Menulis data ke dalam file csv
             writer.writerows(database.values())
 
 if __name__ == "__main__":
-    # Mendefinisikan tampilan utama aplikasi
+    """
+    Tampilan utama menu aplikasi
+    """
     main_menu = '''
 ==========================================
       Selamat datang di e-MotorMabur
@@ -67,7 +69,7 @@ Aplikasi pencatatan data penumpang pesawat
           Ada yang bisa dibantu?
 Silahkan pilih nomor sesuai keperluan Anda!
 
-1. Daftar Penumpang 
+1. Daftar Penumpang
 2. Registrasi Data Penumpang
 3. Ubah Data Penumpang
 4. Hapus Data Penumpang
@@ -76,11 +78,11 @@ Silahkan pilih nomor sesuai keperluan Anda!
 ==========================================
 
 Masukkan pilihan Anda: '''
-    
-# Membersihkan tampilan user
 clear_screen()
 
-    # Setting the path of database file
+"""
+Memastikan aplikasi mengakses file database yang dibutuhkan
+"""
 if getattr(sys, 'frozen', False):
     PATH = sys._MEIPASS
     PATH = os.path.join(PATH, 'data/data_penumpang.csv') 
@@ -88,8 +90,6 @@ else:
     PATH = os.getcwd()
     PATH = os.path.join(PATH, 'data/data_penumpang.csv') 
 
-# Initializing database
-database = initialize_db()
+database = akses_db()
 
-# Menjalankan menu utama
 main()
