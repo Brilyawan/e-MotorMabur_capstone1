@@ -290,7 +290,7 @@ def ubah_data(table):
                                 if NIK in list_NIK:
                                     print(f"\nNIK:'{NIK}' sudah ada, silahkan masukkan NIK yang lain.")
                                 else:
-                                    break
+                                    break   
                             else:
                                 print("\nNIK harus berupa angka dan terdiri dari 16 digit. Silakan coba lagi.")
                     elif pilihan == 3:
