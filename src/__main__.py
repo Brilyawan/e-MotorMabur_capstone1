@@ -14,11 +14,8 @@ def akses_db():
     Untuk mengakses database, memunculkannya dalam bentuk dictionary
     """
     with open(PATH, 'r') as file:
-        # Membuat objek reader
         reader = csv.reader(file, delimiter=";")
-        # Inisialisasi database kosong
         database = {}
-        # Mengisi data ke dalam database
         for row in reader:
             nomor, name, NIK, airlane, flight_code, ori_airport, dest_airport, ori_region, dest_region, dep_time, ar_time, date = row
             database.update({NIK: [int(nomor), name, int(NIK), str(airlane), str(flight_code), str(ori_airport), str(dest_airport), str(ori_region), str(dest_region), str(dep_time), str(ar_time), str(date)]})
